@@ -34,17 +34,23 @@ public class ShoppingListPage extends BasePage {
     @FindBy(xpath = "//div[@data-testid='shopping-list-name']/h2")
     private WebElement shoppingListHeader;
 
+    @FindBy(xpath = "//div[@class='sc-AxjAm bcMPWx']")
+    private WebElement createShoppingListButton;
+
     @FindBy(xpath = "//div[@class='sc-pTSbw gOmWnw']")
     private WebElement productsList;
 
-    @FindBy(xpath = "//button[@data-testid='vertical-dots-shopping-list-button']")
+    @FindBy(xpath = "//button[@class='sc-fzoLsD sc-fzoKki iasStd']")
     private WebElement shoppingListManu;
 
     @FindBy(xpath = "//h1[@class='sc-fzpdyU sc-psEpA sc-qYRsW htjyTI']")
     private WebElement emptyShoppingList;
 
-    @FindBy(xpath = "//button[@data-testid='shopping-list-clear-list-menu-button']")
-    private WebElement clearList;
+    @FindBy(xpath = "//button[@data-testid='shopping-list-delete-menu-button']")
+    private WebElement deleteList;
+
+    @FindBy(xpath = "//div[contains(text(), 'Sep 6 Shopping List ')]")
+    private List<WebElement> defaultShoppingList;
 
     private final String EMPTY_SHOPPING_LIST = "empty_shoppingList";
 
@@ -78,8 +84,13 @@ public class ShoppingListPage extends BasePage {
         clickOnElement(shoppingListManu);
     }
 
-    public void clearShoppingList() {
-        clickOnElement(clearList);
+    public void createShoppingList(){
+        clickOnElement(createShoppingListButton);
+
+    }
+
+    public void deleteShoppingList() {
+        clickOnElement(deleteList);
     }
 
     public void checkAddedProductToShoppingList(String productName) {

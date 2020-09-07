@@ -42,8 +42,8 @@ public class Steps {
         mainPage.clickButton(buttonName);
     }
 
-    @And("click {string} tab")
-    public void clickOnTab(String tabName) {
+    @And("navigate to {string} tab")
+    public void navigateToTab(String tabName) {
         mainPage.clickOnTab(tabName);
     }
 
@@ -60,6 +60,7 @@ public class Steps {
 
     @And("add {int} products to the list")
     public void addProductsToTheList(int countOfProducts) {
+        shoppingListPage.getDefaultShoppingList().get(0).click();
         if (shoppingListPage.getAddedProductsList().isEmpty()) {
             shoppingListPage.openProductListDropDown();
             List<String> addedProductsList = shoppingListPage.addProductsToList(countOfProducts);
@@ -74,6 +75,7 @@ public class Steps {
 
     @And("open Shopping list menu")
     public void openShoppingListMenu() {
+        shoppingListPage.getDefaultShoppingList().get(0).click();
         shoppingListPage.openShoppingListMenu();
     }
 
@@ -82,13 +84,24 @@ public class Steps {
         shoppingListPage.checkEmptyShoppingList();
     }
 
-    @And("delete Shopping list")
-    public void deleteShoppingList() {
-        shoppingListPage.clearShoppingList();
+    @And("delete Shopping list and click {string}")
+    public void deleteShoppingList(String button) {
+        shoppingListPage.deleteShoppingList();
+        shoppingListPage.clickOnPopUpButtonByText(button);
     }
 
     @Then("check added products {string}")
     public void checkAddedProductsName(String productName) {
+        shoppingListPage.getDefaultShoppingList().get(0).click();
         shoppingListPage.checkAddedProductToShoppingList(productName);
     }
+
+    @And("create Shopping List with default name and click {string}")
+    public void createShoppingListWithDefaultName(String buttonName) {
+        if (shoppingListPage.getDefaultShoppingList().isEmpty()) {
+            shoppingListPage.createShoppingList();
+            shoppingListPage.clickOnPopUpButtonByText(buttonName);
+        }
+    }
+
 }

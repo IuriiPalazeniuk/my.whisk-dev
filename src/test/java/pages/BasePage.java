@@ -32,6 +32,12 @@ public class BasePage {
         elem.click();
     }
 
+    public void clickOnPopUpButtonByText(String text) {
+        wait = new WebDriverWait(driver, 5);
+        WebElement button = wait.until(elementToBeClickable(driver.findElement(
+                By.xpath("//div[contains(@class, 'sc-fznWOq fNofKk') and text() = '" + text + "']"))));
+        button.click();
+    }
 
 
 }
